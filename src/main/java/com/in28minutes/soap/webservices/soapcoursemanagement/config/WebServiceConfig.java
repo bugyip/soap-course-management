@@ -15,7 +15,6 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,13 +35,23 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return new SimpleXsdSchema(new ClassPathResource("course-details.xsd"));
     }
 
+    // A spring bean. The name of the bean is the name of the wsdl in the URL.
     @Bean(name = "courses")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema coursesSchema) {
         DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
 
+        // The <portType> element combines multiple message elements to form a complete one-way or round-trip operation.
+        // For example, a <portType> can combine one request and one response message into a single request/response operation.
+        // This is most commonly used in SOAP services. A portType can define multiple operations.
         definition.setPortTypeName("CoursePort");
+
+        // Default name space
         definition.setTargetNamespace("http://in28minutes.com/courses");
+
+        // The url where we want to expose the wsdl at.
         definition.setLocationUri("/ws");
+
+        // xsd
         definition.setSchema(coursesSchema);
 
         return definition;
