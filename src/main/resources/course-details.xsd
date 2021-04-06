@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://in28minutes/courses" xmlns:cour="http://in28minutes/courses" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- getById -->
+
+  <xs:element name="GetCourseDetailsRequest" type="cour:GetCourseDetailsRequestType" />
+
+  <xs:complexType name="GetCourseDetailsRequestType">
+    <xs:sequence>
+      <xs:element type="xs:int" name="id" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="GetCourseDetailsResponse" type="cour:GetCourseDetailsResponseType" />
+
+  <xs:complexType name="GetCourseDetailsResponseType">
+    <xs:sequence>
+      <xs:element type="cour:CourseDetailsType" name="CourseDetails" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- getAll -->
+
+  <xs:element name="GetAllCourseDetailsRequest" type="cour:GetAllCourseDetailsRequestType" />
+
+  <xs:complexType name="GetAllCourseDetailsRequestType">
+  </xs:complexType>
+
+  <xs:element name="GetAllCourseDetailsResponse" type="cour:GetAllCourseDetailsResponseType" />
+
+  <xs:complexType name="GetAllCourseDetailsResponseType">
+    <xs:sequence>
+      <xs:element type="cour:CourseDetailsType" name="AllCourseDetails" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- delete -->
+
+  <xs:element name="DeleteCourseDetailsRequest" type="cour:DeleteCourseDetailsRequestType" />
+
+  <xs:complexType name="DeleteCourseDetailsRequestType">
+    <xs:sequence>
+      <xs:element type="xs:int" name="id"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:element name="DeleteCourseDetailsResponse" type="cour:DeleteCourseDetailsResponseType" />
+
+  <xs:complexType name="DeleteCourseDetailsResponseType">
+    <xs:sequence>
+      <xs:element name="status" type="cour:StatusType" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- common -->
+
+  <xs:simpleType name="StatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SUCCESS" />
+      <xs:enumeration value="FAILURE" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="CourseDetailsType">
+    <xs:sequence>
+      <xs:element type="xs:int" name="id"/>
+      <xs:element type="xs:string" name="name"/>
+      <xs:element type="xs:string" name="description"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+
+</xs:schema>
+
